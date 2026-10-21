@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mapy Pomorza Zachodniego</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script defer src="{{ url_for('static', filename='mapa.js') }}"></script>
+</head>
+<body>
+    <h1>Mapy Pomorza Zachodniego</h1>
+    <p>Włącz wybrane mapy i ustaw ich krycie. 100% oznacza pełny obraz.</p>
+
+    <div class="uklad">
+        <div class="panel">
+            <h2>Warstwy</h2>
+            <div class="warstwa">
+                <label><input type="checkbox" id="osm" checked> OpenStreetMap</label>
+                <label for="osm-krycie">Krycie: <span id="osm-wartosc">100</span>%</label>
+                <input type="range" id="osm-krycie" min="0" max="100" value="100">
+            </div>
+            <div class="warstwa">
+                <label><input type="checkbox" id="orto"> Ortofotomapa</label>
+                <label for="orto-krycie">Krycie: <span id="orto-wartosc">70</span>%</label>
+                <input type="range" id="orto-krycie" min="0" max="100" value="70">
+            </div>
+            <div class="warstwa">
+                <label><input type="checkbox" id="nmt"> Cieniowanie NMT</label>
+                <label for="nmt-krycie">Krycie: <span id="nmt-wartosc">55</span>%</label>
+                <input type="range" id="nmt-krycie" min="0" max="100" value="55">
+            </div>
+            <div class="warstwa">
+                <label><input type="checkbox" id="messtischblatt"> Messtischblatt</label>
+                <label for="messtischblatt-krycie">Krycie: <span id="messtischblatt-wartosc">70</span>%</label>
+                <input type="range" id="messtischblatt-krycie" min="0" max="100" value="70">
+            </div>
+            <p>Kolejność od spodu: OSM, ortofotomapa, NMT, Messtischblatt.</p>
+            <button id="region" type="button" disabled>Całe województwo</button>
+            <button id="szczecin" type="button" disabled>Przykład: Szczecin</button>
+            <p id="komunikat" role="status">Wczytywanie granicy…</p>
+            <h2>Mapy historyczne</h2>
+            <p>Warstwa Messtischblatt: <a href="https://www.susudata.de/messtisch/tk25.html">Susudata</a>.
+                Kafelki: <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> — wykorzystanie niekomercyjne.</p>
+            <p>Warstwa łączy różne arkusze i wydania. Nie przedstawia jednego wspólnego roku dla całego regionu. W niektórych miejscach może brakować pokrycia.</p>
+            <p>Inne archiwa:</p>
+            <a href="https://kartenforum.slub-dresden.de/">SLUB Dresden</a><br>
+            <a href="https://mapy.amzp.pl/maps.shtml">Archiwum Map Zachodniej Polski</a><br>
+            <a href="https://geoportal.muzeum.szczecin.pl/geoportal/mapy-archiwalne.html">Muzeum Narodowe w Szczecinie</a>
+        </div>
+        <div id="mapa" aria-label="Mapa województwa zachodniopomorskiego"></div>
+    </div>
+    <p class="zrodla">Granica, ortofotomapa i NMT: GUGiK. Mapa: OpenStreetMap.
+        Cieniowanie NMT przedstawia rzeźbę terenu, nie podaje wysokości punktu.</p>
+    <noscript>Mapa wymaga włączenia JavaScript.</noscript>
+</body>
+</html>
